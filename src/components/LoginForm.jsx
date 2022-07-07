@@ -1,12 +1,39 @@
 import { Link } from "react-router-dom";
+import { useAuthContext } from "../hooks/useAuthContext";
 import InputComp from "./subcomponents/InputComp";
 
 export default function LoginForm() {
+  const { handleLogin, doctor, setDoctor, error } = useAuthContext();
+
+  const handleDataChange = (e) => {
+    setDoctor({ ...doctor, [e.target.name]: e.target.value });
+  };
+
   return (
-    <form className="flex flex-col gap-10 w-11/12 lg:w-8/12 items-center">
+    <form
+      onSubmit={handleLogin}
+      className="flex flex-col gap-10 w-11/12 lg:w-8/12 items-center"
+    >
       <p className="text-4xl font-bold text-center">Iniciar sesión</p>
-      <InputComp label="Email" type="email" placeholder="email@mail.com" />
-      <InputComp label="Contraseña" type="password" placeholder="Contraseña" />
+      <InputComp
+        name="email"
+        value={doctor.email}
+        label="Email"
+        type="email"
+        placeholder="email@mail.com"
+        onChange={handleDataChange}
+      />
+      <InputComp
+        name="password"
+        value={doctor.password}
+        label="Contraseña"
+        type="password"
+        placeholder="Contraseña"
+        onChange={handleDataChange}
+      />
+        <p className={`${error ? "block" : "hidden"} text-center text-red-500`}>
+          {error}
+        </p>
       <div className="form-control flex flex-col sm:flex-row gap-5 w-full items-center justify-between">
         <label className="label cursor-pointer gap-5">
           <span className="label-text">Recordarme</span>

@@ -1,16 +1,15 @@
 import React from "react";
-import Footer from "../components/subcomponents/Footer";
-import Header from "../components/subcomponents/Header";
-import HomeSection from "../components/subcomponents/HomeSection";
+import LoginForm from "../components/LoginForm";
 
 export default function LoginHome() {
   return (
-    <div className="bg-base-200">
-      <Header />
-      <div className="flex flex-col container mx-auto p-20 justify-center items-center">
-        <HomeSection />
+    <div className="flex flex-col lg:flex-row h-screen justify-center items-center">
+      <div className="flex-1 bg-base-200 h-full items-center justify-center hidden lg:flex">
+        <p className="text-5xl font-bold">Bienvenido</p>
       </div>
-      <Footer />
+      <div className="flex flex-1 h-full items-center justify-center w-11/12 lg:w-8/12">
+        <LoginForm />
+      </div>
     </div>
   );
 }
