@@ -16,22 +16,15 @@ function App() {
 
   return (
     <Routes>
-      {!loggedUser ? (
-        <>
-          <Route index exact element={<LoginHome />} />
-          <Route path="/register" element={<Register />} />
-        </>
-      ) : (
-        <>
-          <Route path="/home" element={<Home />} />
-          <Route path="/appointments" element={<QuotesList />}>
-            <Route path=":id" element={<QuotesList />} />
-          </Route>
-          <Route path="/patients" element={<Patients />}>
-            <Route path=":id" element={<Patients />} />
-          </Route>
-        </>
-      )}
+      <Route index exact element={<LoginHome />} />
+      <Route path="/register" element={<Register />} />
+      <Route path="/home" element={<Home />} />
+      <Route path="/appointments" element={<QuotesList />}>
+        <Route path=":id" element={<QuotesList />} />
+      </Route>
+      <Route path="/patients" element={<Patients />}>
+        <Route path=":id" element={<Patients />} />
+      </Route>
       <Route path="*" element={<p>No se encontró la ruta</p>} />
     </Routes>
   );
