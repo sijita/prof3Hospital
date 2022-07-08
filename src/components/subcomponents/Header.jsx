@@ -3,6 +3,11 @@ import { BiLogOutCircle, BiBell } from "react-icons/bi";
 
 export default function Header() {
   let navigate = useNavigate();
+  const name =
+    JSON.parse(window.localStorage.getItem("logged"))?.message.name +
+    " " +
+    JSON.parse(window.localStorage.getItem("logged"))?.message.lastName;
+
   return (
     <header>
       <nav className="flex gap-10 flex-col md:flex-row p-8 bg-white justify-around items-center">
@@ -15,7 +20,7 @@ export default function Header() {
           </Link>
         </div>
         <div className="flex gap-10 items-center">
-          <p className="font-bold">Simón Jiménez Tamayo</p>
+          <p className="font-bold">{name}</p>
           <button>
             <BiBell className="text-xl" />
           </button>

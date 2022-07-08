@@ -3,17 +3,23 @@ import { API } from "../config";
 import useSWR from "swr";
 import axios from "axios";
 import { useLocation } from "react-router-dom";
-import { useEffect } from "react";
 
 const GlobalContext = createContext();
 
 const GlobalContextProvider = ({ children }) => {
   const { pathname } = useLocation();
 
-  const { data: appointments } = useSWR(API + "appointments");
-  const { data: patients } = useSWR(API + "patients");
+  const { data: appointments } = useSWR(
+    (pathname.includes("home") || pathname.includes("appointments")) &&
+      API + "appointments"
+  );
+  const { data: patients } = useSWR(
+    (pathname.includes("home") ||
+      pathname.includes("patients") ||
+      pathname.includes("appointments")) &&
+      API + "patients"
+  );
 
-  const [loggedUser, setLoggedUser] = useState(null);
   const [isAppointModalOpen, setIsAppointModalOpen] = useState(false);
   const [isPatientModalOpen, setIsPatientModalOpen] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
@@ -37,7 +43,7 @@ const GlobalContextProvider = ({ children }) => {
   const handleAddAppointment = async (e) => {
     e.preventDefault();
     const url = API + "appointment";
-    if (pathname.endsWith("appointments")) {
+    if (pathname.endsWith("appointments") || pathname.endsWith("home")) {
       await axios
         .post(url, {
           ...appointment,
@@ -69,7 +75,7 @@ const GlobalContextProvider = ({ children }) => {
   const handleAddPatient = async (e) => {
     e.preventDefault();
     const url = API + "patient";
-    if (pathname.endsWith("patients")) {
+    if (pathname.endsWith("patients") || pathname.endsWith("home")) {
       await axios
         .post(url, patient)
         .then((res) => {
@@ -93,8 +99,6 @@ const GlobalContextProvider = ({ children }) => {
   };
 
   const data = {
-    loggedUser,
-    setLoggedUser,
     handleAddPatient,
     isPatientModalOpen,
     setIsPatientModalOpen,

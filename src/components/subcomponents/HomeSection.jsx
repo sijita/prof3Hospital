@@ -150,7 +150,7 @@ export default function HomeSection() {
                 </div>
               </div>
             }
-          ></Card>
+          />
         </div>
       </div>
       <div className="w-full">

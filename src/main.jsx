@@ -25,11 +25,11 @@ ReactDOM.createRoot(document.getElementById("root")).render(
       }
     >
       <Router>
-        <GlobalContextProvider>
-          <AuthContextProvider>
+        <AuthContextProvider>
+          <GlobalContextProvider>
             <App />
-          </AuthContextProvider>
-        </GlobalContextProvider>
+          </GlobalContextProvider>
+        </AuthContextProvider>
       </Router>
     </Suspense>
   </SWRConfig>

@@ -1,14 +1,14 @@
-import { createContext, useRef, useState } from "react";
-import { useGlobalContext } from "../hooks/useGlobalContext";
+import { createContext, useRef, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { API } from "../config";
 import axios from "axios";
 
 const AuthContext = createContext();
 
 const AuthContextProvider = ({ children }) => {
   let navigate = useNavigate();
-  const { API } = useGlobalContext();
   const confirmPassword = useRef("");
+  const [credentials, setCredentials] = useState(null);
   const [error, setError] = useState(null);
   const [doctor, setDoctor] = useState({
     identification: "",
@@ -80,6 +80,8 @@ const AuthContextProvider = ({ children }) => {
     confirmPassword,
     error,
     handleLogin,
+    credentials,
+    setCredentials,
   };
   return <AuthContext.Provider value={data}>{children}</AuthContext.Provider>;
 };
